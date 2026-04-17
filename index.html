@@ -2,6 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+
+<!-- ✅ FIX 1: Viewport (VERY IMPORTANT) -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Portfolio</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
@@ -18,24 +22,21 @@
 body {
   font-family: 'Poppins', sans-serif;
   scroll-behavior: smooth;
+  background: #000; /* avoids white flashes */
 }
 
 /* Header */
 header {
   height: 70px;
-  animation: slideDown 0.8s ease;
   width: 100%;
   background: #000;
   display: flex;
   align-items: center;
-  padding: 0 50px;
+  padding: 0 20px;
   position: sticky;
   top: 0;
   z-index: 1000;
-}
-
-header.scrolled {
-  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  animation: slideDown 0.6s ease;
 }
 
 nav {
@@ -102,42 +103,42 @@ nav ul li a:hover {
 
 /* Sections */
 .section {
-  height: 120vh;
-  overflow: hidden;
+  min-height: 100vh; /* ✅ FIX 2 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* 🔥 IMAGE ANIMATION */
+/* Images */
 .section-img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto; /* ✅ FIX 3 */
   display: block;
+  object-fit: cover;
 
   opacity: 0;
-  transform: scale(1.1) translateY(80px);
-  transition: all 1s ease;
+  transform: scale(1.05) translateY(60px);
+  transition: all 0.8s ease;
 }
 
-/* When visible */
 .section-img.show {
   opacity: 1;
   transform: scale(1) translateY(0);
 }
 
-/* Hover effect */
+/* Hover */
 .section-img:hover {
-  transform: scale(1.05);
+  transform: scale(1.03);
 }
 
-/* Tall section */
+/* Tall section fix */
 .section.tall {
-  height: auto;
+  min-height: auto;
 }
 
 .section.tall img {
   width: 100%;
   height: auto;
-  object-fit: contain;
 }
 
 /* Divider */
@@ -151,18 +152,18 @@ nav ul li a:hover {
 
   header {
     height: 60px;
-    padding: 0 20px;
   }
 
   .logo {
     font-size: 16px;
   }
 
-  /* Hamburger show */
+  /* Show hamburger */
   .menu-toggle {
     display: block;
   }
 
+  /* Mobile menu */
   nav ul {
     position: absolute;
     top: 60px;
@@ -185,18 +186,13 @@ nav ul li a:hover {
     margin: 15px 0;
   }
 
+  /* Prevent gaps */
   .section {
-    height: auto;
-  }
-
-  .section-img {
-    width: 100%;
-    height: auto;
-    object-fit: contain;
+    min-height: auto;
   }
 }
 
-/* Animations */
+/* Animation */
 @keyframes slideDown {
   from {
     transform: translateY(-100%);
@@ -228,13 +224,13 @@ nav ul li a:hover {
 </header>
 
 <!-- Sections -->
-<section id="home" class="section tall">
+<section id="home" class="section">
   <img src="pic1.jpg" class="section-img">
 </section>
 
 <div class="divider"></div>
 
-<section id="about" class="section tall">
+<section id="about" class="section">
   <img src="pic2.jpg" class="section-img">
 </section>
 
@@ -246,36 +242,37 @@ nav ul li a:hover {
 
 <div class="divider"></div>
 
-<section id="projects" class="section tall">
+<section id="projects" class="section">
   <img src="pic4.png" class="section-img">
 </section>
 
 <div class="divider"></div>
 
-<section class="section tall">
+<section class="section">
   <img src="pic5.png" class="section-img">
 </section>
 
 <div class="divider"></div>
 
-<section class="section tall">
+<section class="section">
   <img src="pic6.png" class="section-img">
 </section>
 
 <div class="divider"></div>
 
-<section class="section tall">
+<section class="section">
   <img src="pic7.png" class="section-img">
 </section>
 
 <div class="divider"></div>
 
-<section class="section tall">
+<section class="section">
   <img src="pic8.png" class="section-img">
 </section>
 
 <!-- JS -->
 <script>
+
 const toggle = document.getElementById('menu-toggle');
 const nav = document.getElementById('nav-links');
 
@@ -283,24 +280,30 @@ toggle.addEventListener('click', () => {
   nav.classList.toggle('active');
 });
 
+/* Close menu on click */
 document.querySelectorAll('#nav-links a').forEach(link => {
   link.addEventListener('click', () => {
     nav.classList.remove('active');
   });
 });
 
-/* 🔥 Scroll Animation */
+/* Scroll animation */
 const images = document.querySelectorAll('.section-img');
 
-window.addEventListener('scroll', () => {
+const revealOnScroll = () => {
   images.forEach(img => {
     const rect = img.getBoundingClientRect();
-
-    if (rect.top < window.innerHeight - 100) {
+    if (rect.top < window.innerHeight - 80) {
       img.classList.add('show');
     }
   });
-});
+};
+
+window.addEventListener('scroll', revealOnScroll);
+
+/* Trigger on load */
+window.addEventListener('load', revealOnScroll);
+
 </script>
 
 </body>
