@@ -46,6 +46,12 @@ nav {
   align-items: center;
 }
 
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}  
+
 .logo {
   color: white;
   transition: 0.3s;
@@ -103,10 +109,8 @@ nav ul li a:hover {
 
 /* Sections */
 .section {
-  min-height: 100vh; /* ✅ FIX 2 */
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 100%;
+  display: block;
 }
 
 /* Images */
@@ -115,7 +119,7 @@ nav ul li a:hover {
   height: auto; /* ✅ FIX 3 */
   display: block;
   object-fit: cover;
-
+  vertical-align: bottom;
   opacity: 0;
   transform: scale(1.05) translateY(60px);
   transition: all 0.8s ease;
@@ -149,11 +153,15 @@ nav ul li a:hover {
 
 /* 📱 Mobile */
 @media (max-width: 768px) {
-
+  
   header {
     height: 60px;
   }
 
+  .divider {
+    height: 1px;
+  }
+  
   .logo {
     font-size: 16px;
   }
