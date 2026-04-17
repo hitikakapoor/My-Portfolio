@@ -281,6 +281,7 @@ nav ul li a:hover {
 <!-- JS -->
 <script>
 
+// Hamburger toggle
 const toggle = document.getElementById('menu-toggle');
 const nav = document.getElementById('nav-links');
 
@@ -288,29 +289,28 @@ toggle.addEventListener('click', () => {
   nav.classList.toggle('active');
 });
 
-/* Close menu on click */
 document.querySelectorAll('#nav-links a').forEach(link => {
   link.addEventListener('click', () => {
     nav.classList.remove('active');
   });
 });
 
-/* Scroll animation */
+// 🔥 FIXED animation using Intersection Observer
 const images = document.querySelectorAll('.section-img');
 
-const revealOnScroll = () => {
-  images.forEach(img => {
-    const rect = img.getBoundingClientRect();
-    if (rect.top < window.innerHeight - 80) {
-      img.classList.add('show');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('show');
     }
   });
-};
+}, {
+  threshold: 0.2
+});
 
-window.addEventListener('scroll', revealOnScroll);
-
-/* Trigger on load */
-window.addEventListener('load', revealOnScroll);
+images.forEach(img => {
+  observer.observe(img);
+});
 
 </script>
 
