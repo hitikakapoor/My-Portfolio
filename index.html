@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Portfolio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  scroll-behavior: smooth;
+}
+
+/* Header */
+header {
+  height: 70px;
+  animation: slideDown 0.8s ease;
+  width: 100%;
+  background: #000;
+  display: flex;
+  align-items: center;
+  padding: 0 50px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+header.scrolled {
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+nav {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  color: white;
+  transition: 0.3s;
+}
+
+.logo:hover {
+  color: #bc16d2;
+}
+
+/* Nav Links */
+nav ul {
+  display: flex;
+  list-style: none;
+}
+
+nav ul li {
+  margin-left: 25px;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  position: relative;
+  transition: 0.3s;
+}
+
+/* Hover underline */
+nav ul li a::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  background: #ffdeee;
+  left: 0;
+  bottom: -5px;
+  transition: 0.3s;
+}
+
+nav ul li a:hover::after {
+  width: 100%;
+}
+
+nav ul li a:hover {
+  color: #cfaed1;
+}
+
+/* Hamburger */
+.menu-toggle {
+  display: none;
+  font-size: 28px;
+  color: white;
+  cursor: pointer;
+}
+
+/* Sections */
+.section {
+  height: 120vh;
+  overflow: hidden;
+}
+
+/* 🔥 IMAGE ANIMATION */
+.section-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+
+  opacity: 0;
+  transform: scale(1.1) translateY(80px);
+  transition: all 1s ease;
+}
+
+/* When visible */
+.section-img.show {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+/* Hover effect */
+.section-img:hover {
+  transform: scale(1.05);
+}
+
+/* Tall section */
+.section.tall {
+  height: auto;
+}
+
+.section.tall img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Divider */
+.divider {
+  height: 2px;
+  background: linear-gradient(to right, transparent, #aaa, transparent);
+}
+
+/* 📱 Mobile */
+@media (max-width: 768px) {
+
+  header {
+    height: 60px;
+    padding: 0 20px;
+  }
+
+  .logo {
+    font-size: 16px;
+  }
+
+  /* Hamburger show */
+  .menu-toggle {
+    display: block;
+  }
+
+  nav ul {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background: #000;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+
+    max-height: 0;
+    overflow: hidden;
+    transition: 0.4s ease;
+  }
+
+  nav ul.active {
+    max-height: 300px;
+  }
+
+  nav ul li {
+    margin: 15px 0;
+  }
+
+  .section {
+    height: auto;
+  }
+
+  .section-img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+}
+
+/* Animations */
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- Header -->
+<header>
+  <nav>
+    <h2 class="logo">My Portfolio</h2>
+
+    <div class="menu-toggle" id="menu-toggle">☰</div>
+
+    <ul id="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- Sections -->
+<section id="home" class="section tall">
+  <img src="pic1.jpg" class="section-img">
+</section>
+
+<div class="divider"></div>
+
+<section id="about" class="section tall">
+  <img src="pic2.jpg" class="section-img">
+</section>
+
+<div class="divider"></div>
+
+<section id="contact" class="section tall">
+  <img src="pic3.jpg" class="section-img">
+</section>
+
+<div class="divider"></div>
+
+<section id="projects" class="section tall">
+  <img src="pic4.png" class="section-img">
+</section>
+
+<div class="divider"></div>
+
+<section class="section tall">
+  <img src="pic5.png" class="section-img">
+</section>
+
+<div class="divider"></div>
+
+<section class="section tall">
+  <img src="pic6.png" class="section-img">
+</section>
+
+<div class="divider"></div>
+
+<section class="section tall">
+  <img src="pic7.png" class="section-img">
+</section>
+
+<div class="divider"></div>
+
+<section class="section tall">
+  <img src="pic8.png" class="section-img">
+</section>
+
+<!-- JS -->
+<script>
+const toggle = document.getElementById('menu-toggle');
+const nav = document.getElementById('nav-links');
+
+toggle.addEventListener('click', () => {
+  nav.classList.toggle('active');
+});
+
+document.querySelectorAll('#nav-links a').forEach(link => {
+  link.addEventListener('click', () => {
+    nav.classList.remove('active');
+  });
+});
+
+/* 🔥 Scroll Animation */
+const images = document.querySelectorAll('.section-img');
+
+window.addEventListener('scroll', () => {
+  images.forEach(img => {
+    const rect = img.getBoundingClientRect();
+
+    if (rect.top < window.innerHeight - 100) {
+      img.classList.add('show');
+    }
+  });
+});
+</script>
+
+</body>
+</html>
